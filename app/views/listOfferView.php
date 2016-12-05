@@ -1,55 +1,69 @@
 <?php 
-	include_once './helpers/inputs.php';
-	include_once './helpers/functionsViews.php';
+	include_once HELPERS_PATH.'inputs.php';
 ?>
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Lista Ofertas</title>
-		
-	</head>
+
+<?= AddButton($_SESSION['UserInfo']->IsAdmin(), '?'.CTRL_VAR.'='.CTRL_EDIT.''); ?>
+
+<form action="" method="post">
+	<label>
+		Descripcion:
+		<input type="text" name="descriptionFilter"/>
+	</label>
+
+	<label>
+		Contacto:
+		<input type="text" name="contactFilter"/>
+	</label>
+
+	<label>
+		Candidato:
+		<input type="text" name="candidateFilter"/>
+	</label>
+
+	<input type="submit" name="filterSearch" value="Filtrar Busqueda"/>
+
+</form>
+
+<table>
 	
-	<body>
+	<tr>
+		<th>Descripcion:</th>
+		<th>Contacto:</th>
+		<th>Provincia:</th> 
+		<th>Estado:</th>
+		<th>Candidato seleccionado:</th> 
+	</tr>
+	
+	<?php 
+		$isAdmin = $_SESSION['UserInfo']->IsAdmin();
 
-		<?= AddButton($_SESSION['UserInfo']->IsAdmin(), 'index.php/addOffer'); ?>
+		foreach($offerList as $offer)
+		{
+			echo '<tr>';
 
-		<form action="" method="post">
-			<label>
-				Descripcion:
-				<input type="text" name="descriptionFilter"/>
-			</label>
+				echo '<td>'.$offer->description.'</td>';
+				echo '<td>'.$offer->contact.'</td>';
+				echo '<td>'.$offer->assentament.'</td>';
+				echo '<td>'.$offer->state.'</td>';
+				echo '<td>'.$offer->psicologist.'</td>';
+				echo '<td>'.$offer->candidate.'</td>';
+						
+				echo '<td>';
+				ViewButton(true, '?'.CTRL_VAR.'='.CTRL_INFO.'&id='.$offer->id);
+				echo '</td>';
 
-			<label>
-				Contacto:
-				<input type="text" name="contactFilter"/>
-			</label>
+				echo '<td>';
+				EditButton(true, '?'.CTRL_VAR.'='.CTRL_EDIT.'&id='.$offer->id);
+				echo '</td>';
+				
+				echo '<td>';
+				RemoveButton($isAdmin, '?'.CTRL_VAR.'='.CTRL_DELETE.'&id='.$offer->id);
+				echo '</td>';
 
-			<label>
-				Candidato:
-				<input type="text" name="candidateFilter"/>
-			</label>
+			echo '</tr>';
+		}
+	?>
+	
 
-			<input type="submit" name="filterSearch" value="Filtrar Busqueda"/>
-
-		</form>
-
-		<table>
-			
-			<tr>
-				<th>Descripcion:</th>
-				<th>Contacto:</th>
-				<th>Provincia:</th> 
-				<th>Estado:</th>
-				<th>Candidato seleccionado:</th> 
-			</tr>
-			
-			<?php DrawListOffers($offerList); ?>
-			
-		
-		</table>
-		
-		
-	</body>
-</html>
+</table>

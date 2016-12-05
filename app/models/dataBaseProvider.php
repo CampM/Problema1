@@ -124,6 +124,13 @@ class DataBaseProvider{
 		}
 	}
 
+	
+	/**
+	 * Inserta en la base de datos controlando la inyeccion de codigo
+	 * @param unknown $tabla
+	 * @param unknown $tarea
+	 * @return boolean
+	 */
 	public function Insertar($tabla, $tarea){
    
         $values=array();
@@ -150,6 +157,14 @@ class DataBaseProvider{
         return true;
     }
 
+	
+    /**
+     * Modifica un registro en la base de datos controlando la inyeccion de codigo
+     * @param unknown $tabla
+     * @param unknown $tarea
+     * @param unknown $condicion
+     * @return boolean
+     */
     public function Modificar($tabla, $tarea, $condicion){
    
         $campos=array();
@@ -173,7 +188,14 @@ class DataBaseProvider{
         }
         return true;
     }
-   
+   	
+   	
+    /**
+     * Elimina un regisstro de la base de datos controlando la inyeccion de codigo
+     * @param unknown $tabla
+     * @param unknown $condicion
+     * @return boolean
+     */
     public function Eliminar($tabla, $condicion)
     {
        
@@ -192,6 +214,12 @@ class DataBaseProvider{
        return true;
     }    
 
+    
+    /**
+     * Cuenta el numero de filas de una consulta dada
+     * @param unknown $result
+     * @return number|unknown
+     */
     function Contar($result=NULL)
 	{
 		if (! $result)

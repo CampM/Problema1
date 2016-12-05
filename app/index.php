@@ -1,68 +1,64 @@
 <?php
-	include_once './controllers/listOfferController.php';
-	include_once './controllers/addOfferController.php';
-	include_once './controllers/loginController.php';
-	include_once './controllers/showOfferController.php';
-	include_once './controllers/deleteOfferController.php';
-	include_once './models/functionsDB.php';
+
+// definimos constantes que facilitan el trabajo
+define('SITE', 'http://localhost/Problema1/app/');
+define('INDEX_PATH', SITE.'index.php');
+
+define('CTRL_PATH', __DIR__.'/controllers/');
+define('MODEL_PATH', __DIR__.'/models/');
+define('VIEW_PATH', __DIR__.'/views/');
+//define('TEMPLATE_PATH', __DIR__.'/plantilla/');
+//define('LIB_PATH', __DIR__.'/lib/');
+define('HELPERS_PATH', __DIR__.'/helpers/');
+
+// Usamos constantes por comodidad
+DEFINE('CTRL_VAR', 'c');
+DEFINE('CTRL_HOME', '1');
+DEFINE('CTRL_EDIT', '2');
+DEFINE('CTRL_INFO', '3');
+DEFINE('CTRL_DELETE', '4');
+
+$actionMap=array(
+    CTRL_HOME=>'listOfferController',
+    CTRL_EDIT=>'editOfferController',
+    CTRL_INFO=>'infoOfferController',
+    CTRL_DELETE=>'deleteOfferController',
+);
+        
+// Cuerpo del controlador frontal
+include_once MODEL_PATH.'functionsDB.php';
+include_once HELPERS_PATH.'views.php';
 
 
-	session_start();
+session_start();
 
-	$uri = explode('?', $_SERVER['REQUEST_URI'])[0];
+//control de usuarios
+if (isset($_SESSION['UserInfo'])){
+    $action = isset($_GET[CTRL_VAR]) ? $_GET[CTRL_VAR] : CTRL_HOME;
+    if (isset($actionMap[$action]))
+    {
+        // Nombre del fichero a incluir
+        $ctrl_file=CTRL_PATH.$actionMap[$action].'.php';
 
-	if (isset($_SESSION['UserInfo'])){
-
-		//Controlar si la url de acceso es sin el fichero index o con el fichero index
-		if ((($uri == '/Problema1/app/') || ($uri == '/Problema1/app/index.php'))&&(isset($_POST['filterSearch']))){
-		    FilterOfferList();
-		} 
-		elseif ((($uri == '/Problema1/app/') || ($uri == '/Problema1/app/index.php'))&&(!isset($_POST['filterSearch']))){
-		    OfferList();
-		} 
-		elseif($uri == '/Problema1/app/index.php/addOffer')
-		{
-			AddOffer();
-		}
-		elseif($uri == '/Problema1/app/index.php/saveOffer')
-		{
-			SaveOffer();
-		}
-		elseif(($uri == '/Problema1/app/index.php/editOffer') && (isset($_GET['id'])))
-		{
-			EditOffer($_GET['id']);
-		}
-		elseif(($uri == '/Problema1/app/index.php/showOffer') && (isset($_GET['id'])))
-		{
-			ShowOffer($_GET['id']);
-		}
-		elseif(($uri == '/Problema1/app/index.php/deleteOffer') && (isset($_GET['id'])))
-		{
-			DeleteOffer($_GET['id']);
-		}
-		elseif(($uri == '/Problema1/app/index.php/confirmDeleteOffer') && (isset($_GET['id'])))
-		{
-			ConfirmDeleteOffer($_GET['id']);
-		}
-		
-	}
-	else
-	{
-		if (isset($_POST['user']) && isset($_POST['pass'])){
-
-			Login($_POST['user'], $_POST['pass']);
-		}
-		else //($uri == '/Problema1/app/index.php/login')
-		{
-			LoginForm();
-		}
-		/*else
-		{
-			GoLoginForm();
-		}*/
-	}
-
-	
-	echo $uri;
-
-?>
+        if (file_exists($ctrl_file))
+        {
+            include($ctrl_file);
+            
+        }
+        else
+        {   
+            // Error 404
+           echo LoadLayout('Página no encontrada', 'Error 404: Pagina no encontrada');
+        }
+    }
+    else 
+    {
+        // Error 404
+       echo LoadLayout('Página no encontrada', 'Error 404: Pagina no encontrada');
+    }
+}
+//else de usuarios
+else
+{
+    include(CTRL_PATH.'loginController.php');
+}

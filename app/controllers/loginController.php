@@ -2,15 +2,9 @@
 include_once './models/functionsDB.php';
 
 
+if (isset($_POST['user']) && isset($_POST['pass'])){
 
-function LoginForm(){
-
-	include './views/loginView.php';
-}
-
-function Login($user, $pass){
-
-	$model = DoLogin($user, $pass);
+    $model = DoLogin($_POST['user'], $_POST['pass']);
 
 	if ($model != NULL){
 		$_SESSION['UserInfo'] = $model;
@@ -18,9 +12,9 @@ function Login($user, $pass){
 
 	header('location: '.$_SERVER['REQUEST_URI']);
 }
-
-/*function GoLoginForm(){
-	header('location: ../index.php/login');
-}*/
+else
+{
+	echo LoadView('loginView');
+}
 
 ?>
