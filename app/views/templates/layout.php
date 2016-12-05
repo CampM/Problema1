@@ -14,7 +14,7 @@
 
     <div id="menu">
         <ul>
-            <li><?= AddButton($_SESSION['UserInfo']->IsAdmin(), '?'.CTRL_VAR.'='.CTRL_EDIT.''); ?></li>
+            <li><?= AddButton($_SESSION['UserInfo']->IsAdmin(), '?'.CTRL_VAR.'='.CTRL_ADD.''); ?></li>
             <li>Listado de ofertas</li>
             <li>Listado de usuarios</li>
             <li>Cerrar sesión</li><!--//session_destroy()-->

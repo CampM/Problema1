@@ -14,41 +14,33 @@ if ($_POST)
 	//Si se detectan errores en los campos del formulario
 	if (count($errors) == 0)
 	{
-		
-		$isOk = ModifyOffer($offer);
+		$isOk = InsertOffer($offer);
 		if ($isOk){
 			//Reedireccion del navegador
 			header('location: '.INDEX_PATH);
+			
 		}
 	}
 	else
 	{
 		//Creamos el array de provincias para el selec de edicion
-		$provinceList = ConsultProvince();
+		$provinceList = ConsultProvince();//CAMBIAR DESPUES
 	}
 
 }
 //En caso de no existir formulario 
 else
 {
-	//Si existe get[id] (Por modificacion de oferta)
-	if (isset($_GET['id']))
-	{
-		//Creamos un objeto oferta en funcion a la id
-		$offer = ConsultOfferById($_GET['id']);
-	}
-	else
-	{
-		//Creamos un objeto oferta con el valor de los campos vacios
-		$offer = new OfferModel();
-	}
+	//Creamos un objeto oferta con el valor de los campos vacios
+	$offer = new OfferModel();
 
-	$provinceList = ConsultProvince();
+	//Preparar selectOfertas
+	$provinceList = ConsultProvince();//CAMBIAR DESPUES
 }
 
 //Cargamos la vista de edicion
 echo LoadLayout(
-	'Edicion de una oferta', 
+	'Añadir nueva oferta', 
 	LoadView('editOfferView', array('offer' => $offer, 'provinceList' => $provinceList, 'errors' => $errors))
 );
 

@@ -14,12 +14,14 @@ define('HELPERS_PATH', __DIR__.'/helpers/');
 // Usamos constantes por comodidad
 DEFINE('CTRL_VAR', 'c');
 DEFINE('CTRL_HOME', '1');
-DEFINE('CTRL_EDIT', '2');
-DEFINE('CTRL_INFO', '3');
-DEFINE('CTRL_DELETE', '4');
+DEFINE('CTRL_ADD', '2');
+DEFINE('CTRL_EDIT', '3');
+DEFINE('CTRL_INFO', '4');
+DEFINE('CTRL_DELETE', '5');
 
 $actionMap=array(
     CTRL_HOME=>'listOfferController',
+    CTRL_ADD=>'addOfferController',
     CTRL_EDIT=>'editOfferController',
     CTRL_INFO=>'infoOfferController',
     CTRL_DELETE=>'deleteOfferController',

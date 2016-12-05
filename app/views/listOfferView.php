@@ -3,7 +3,7 @@
 ?>
 
 
-<?= AddButton($_SESSION['UserInfo']->IsAdmin(), '?'.CTRL_VAR.'='.CTRL_EDIT.''); ?>
+<?= AddButton($_SESSION['UserInfo']->IsAdmin(), '?'.CTRL_VAR.'='.CTRL_ADD.''); ?>
 
 <form action="" method="post">
 	<label>

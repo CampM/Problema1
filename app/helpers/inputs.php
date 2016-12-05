@@ -1,12 +1,14 @@
 <?php
-function SelectOption($name, array $options, $value, $canEdit)
-{
-	$readOnly = '';
-	if (! $canEdit){
-		$readOnly = 'disabled="disabled"';
-	}
 
-	echo "<select $readOnly name=\"$name\">";
+function InputCreator($type, $name, $value){
+
+	echo '<input type="'.$type.'" name="'.$name.'" value="'.$value.'" />';
+}
+
+function SelectOption($name, array $options, $value)
+{
+	
+	echo "<select name=\"$name\">";
 
 	foreach($options as $option)
 	{
@@ -21,7 +23,7 @@ function SelectOption($name, array $options, $value, $canEdit)
 	echo "</select>";
 }
 
-function InputsRadio($name, array $radioList, $value, $canEdit)
+function InputsRadio($name, array $radioList, $value)
 {
 
 	$existChecked = false;
@@ -42,19 +44,15 @@ function InputsRadio($name, array $radioList, $value, $canEdit)
 			$userValue = $radioValue;
 		}
 
-		InputRadio($name, $radioText, $radioValue, $userValue, $canEdit);
+		InputRadio($name, $radioText, $radioValue, $userValue);
 
 		$count++;
 	}
 }
 
-function InputRadio($name, $text, $value, $userValue, $canEdit)
+function InputRadio($name, $text, $value, $userValue)
 {
-	$readOnly = '';
-	if (! $canEdit){
-		$readOnly = 'disabled="disabled"';
-	}
-
+	
 	$isSelected = '';
 	if ($userValue == $value)
 	{
@@ -62,7 +60,7 @@ function InputRadio($name, $text, $value, $userValue, $canEdit)
 	}
 
 	echo '<label>';
-	echo '<input type="radio" name="'.$name.'" value="'.$value.'" '.$readOnly.' '. $isSelected . ' />';
+	echo '<input type="radio" name="'.$name.'" value="'.$value.'" '. $isSelected . ' />';
 	echo " $text</label>";
 }
 
