@@ -23,6 +23,22 @@ function SelectOption($name, array $options, $value)
 	echo "</select>";
 }
 
+function GetSelectedOption($name, array $options, $value)
+{	
+	$selectedOption = '';
+
+	foreach($options as $option)
+	{
+		$optionText = $option['text'];
+		$optionValue = $option['value'];
+
+		if ($optionValue == $value){
+			$selectedOption = $optionText;
+		}
+	}
+	return $selectedOption;
+}
+
 function InputsRadio($name, array $radioList, $value)
 {
 
@@ -64,31 +80,7 @@ function InputRadio($name, $text, $value, $userValue)
 	echo " $text</label>";
 }
 
-function inputText($name, $value, $canEdit){
-	$readOnly = '';
-	if (! $canEdit){
-		$readOnly = 'readonly="readonly"';
-	}
-	echo '<input type="text" name="'.$name.'" value="'.$value.'" '.$readOnly.' />';
-}
-
-function inputNumber($name, $value, $canEdit){
-	$readOnly = '';
-	if (! $canEdit){
-		$readOnly = 'readonly="readonly"';
-	}
-	echo '<input type="text" name="'.$name.'" value="'.$value.'" '.$readOnly.' />';
-}
-
 function RemoveButton($isVisible, $url, $text='Eliminar'){
-	
-	if ($isVisible){
-		echo '<a href="'.$url.'">'.$text.'</a>';
-	}
-
-}
-
-function AddButton($isVisible, $url, $text='Añadir nueva oferta'){
 	
 	if ($isVisible){
 		echo '<a href="'.$url.'">'.$text.'</a>';

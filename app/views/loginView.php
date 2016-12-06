@@ -1,4 +1,5 @@
 <html>
+<!--Vista de login para los usuarios -->
     <head>
         <title>Login</title>
         <meta charset="UTF-8">
@@ -13,6 +14,7 @@
 	    </header>
 
 	    <div id="cuerpo">
+	    	<?= $error ?>
 	        <form action="" method="post">
 				<label>
 					Usuario:

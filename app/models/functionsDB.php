@@ -1,8 +1,12 @@
 <?php 
-//Modelo de abstraccion
+/**
+ * Funciones para trabajar con la capa de abstraccion de base de datos
+ */
+
 include_once './Models/DataBaseProvider.php';
 include_once './Models/OfferModel.php';
 include_once './Models/UserModel.php';
+include_once HELPERS_PATH.'format.php';
 
 
 /**
@@ -153,6 +157,9 @@ function ConsultOfferById($offerId){
 	return $offer;
 }
 
+/**
+ * Devuelve la lista de provincias
+ */
 function ConsultProvince(){
 
 	$sql = 'select * from tbl_provincias';
@@ -182,9 +189,12 @@ function ConsultProvince(){
  * @param unknown $reg
  * @return OfferModel
  */
-function ConvertToOffer($reg){
+function ConvertToOffer($reg)
+{
+	$dateCreation = ConvertToSpanishDate($reg['DateCreation']);
+	$dateComunication = ConvertToSpanishDate($reg['DateComunication']);
 
-	$offer = new OfferModel($reg['Id'], $reg['Description'], $reg['Contact'], $reg['ContactTLF'], $reg['ContactMail'], $reg['Address'], $reg['Assentament'], $reg['PostCode'], $reg['Province'], $reg['State'], $reg['DateCreation'], $reg['DateComunication'], $reg['Psicologist'], $reg['Candidate'], $reg['Notes']);
+	$offer = new OfferModel($reg['Id'], $reg['Description'], $reg['Contact'], $reg['ContactTLF'], $reg['ContactMail'], $reg['Address'], $reg['Assentament'], $reg['PostCode'], $reg['Province'], $reg['State'], $dateCreation, $dateComunication, $reg['Psicologist'], $reg['Candidate'], $reg['Notes']);
 
 	return $offer;
 
@@ -198,22 +208,29 @@ function ConvertToOffer($reg){
 function ConvertOfferToSql($offer){
 
 	$offerArray = array(
-		//'Id' => $offer->id,
-		'Description' => $offer->description,
-		'Contact' => $offer->contact,
-		'ContactTLF' => $offer->contactTLF,
-		'ContactMail' => $offer->contactMail,
-		'Address' => $offer->address,
-		'Assentament' => $offer->assentament,
-		'PostCode' => $offer->postCode,
-		'Province' => $offer->province,
 		'State' => $offer->state,
-		//'DateCreation' => $offer->dateCreation,
-		'DateComunication' => $offer->dateComunication,
-		'Psicologist' => $offer->psicologist,
 		'Candidate' => $offer->candidate,
 		'Notes' => $offer->notes
 	);
+
+	if ($_SESSION['UserInfo']->IsAdmin())
+	{
+		$offerArray = array(
+			'Description' => $offer->description,
+			'Contact' => $offer->contact,
+			'ContactTLF' => $offer->contactTLF,
+			'ContactMail' => $offer->contactMail,
+			'Address' => $offer->address,
+			'Assentament' => $offer->assentament,
+			'PostCode' => $offer->postCode,
+			'Province' => $offer->province,
+			'DateComunication' => ConvertToBBDDDate($offer->dateComunication),
+			'Psicologist' => $offer->psicologist,
+			'State' => $offer->state,
+			'Candidate' => $offer->candidate,
+			'Notes' => $offer->notes
+		);
+	}
 
 	return $offerArray;
 }

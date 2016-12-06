@@ -1,4 +1,8 @@
 <?php 
+/**
+ * Capa de abstraccion de base de datos
+ * @var array $db_conf
+ */
 
 $db_conf=array(
 		'servidor'=>'localhost',
@@ -182,8 +186,6 @@ class DataBaseProvider{
    
         if (! $ok)
         {
-            echo "<p>Hay error: .".$this->link->error."</p>";
-            echo $sql;
             return false;
         }
         return true;

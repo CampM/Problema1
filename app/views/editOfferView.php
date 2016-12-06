@@ -1,4 +1,8 @@
 <?php
+/**
+ * Vista para la modificacion de oferta para el administrador
+ */
+
 	include_once HELPERS_PATH.'inputs.php';
 	include_once MODEL_PATH.'offerModel.php';
 ?>
@@ -18,6 +22,12 @@
 			echo '</ul>';
 		}
 	?>
+
+	<div>
+		<label>
+			Fecha de creacion de la oferta: <?php echo $offer->dateCreation; ?>
+		</label>
+	</div>
 
 	<div>
 		<label>
@@ -91,13 +101,6 @@
 					),
 					$offer->state);
 			?>
-		</label>
-	</div>
-
-	<div>
-		<label>
-			Fecha de creacion de la oferta:
-			<?= InputCreator('text', 'dateCreation', $offer->dateCreation); ?>
 		</label>
 	</div>
 

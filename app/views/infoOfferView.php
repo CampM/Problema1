@@ -1,114 +1,98 @@
 <?php
+/**
+ * Vista de informacion completa de la oferta
+ */
 	include_once HELPERS_PATH.'inputs.php';
 ?>
 
 
 <div>
 	<label>
-		Descripcion:
-		<input type="text" name="description" value="<?=$offer->description ?>" readonly="readonly"/>
+		Fecha de creacion de la oferta: <?php echo $offer->dateCreation; ?>
 	</label>
 </div>
 
 <div>
 	<label>
-		Persona de contacto:
-		<input type="text" name="contact" value="<?=$offer->contact ?>" readonly="readonly"/>
+		Descripcion: <?php echo $offer->description; ?>
 	</label>
 </div>
 
 <div>
 	<label>
-		Telefono de contacto:
-		<input type="text" name="contactTLF" value="<?=$offer->contactTLF?>" readonly="readonly"/>
+		Persona de contacto: <?php echo $offer->contact; ?>
+	</label>
+</div>
+
+<div>
+	<label>
+		Telefono de contacto: <?php echo $offer->contactTLF; ?>
 	</label>
 </div>
 
 <div>
 	<label> 
-		Correro electronico:
-		<input type="text" name="contactMail" value="<?=$offer->contactMail?>" readonly="readonly"/>
+		Correro electronico: <?php echo $offer->contactMail; ?>
 	</label>
 </div>
 
 <div>
 	<label>
-		Direccion:
-		<input type="text" name="address" value="<?=$offer->address?>" readonly="readonly"/>
+		Direccion: <?php echo $offer->address; ?>
 	</label>
 </div>
 
 <div>
 	<label>
-		Poblacion:
-		<input type="text" name="assentament" value="<?=$offer->assentament?>" readonly="readonly"/>
+		Poblacion: <?php echo $offer->assentament; ?>
 	</label>
 </div>
 
 <div>
 	<label>
-		Codigo Postal:
-		<input type="text" name="postCode" value="<?=$offer->postCode?>" readonly="readonly"/>
+		Codigo Postal: <?php echo $offer->postCode; ?>
 	</label>
 </div>
 
 <div>
 	<label>
-		Provincia:
-		<?= SelectOption('province', $provinceList, $offer->province, false) ?>
+		Provincia: <?php echo GetSelectedOption('province', $provinceList, $offer->province); ?>
 	</label>
 </div>
 
 <div>
 	<label>
-		Estado:
-		<?= 
-			InputsRadio(
-				'state', 
-				array(
+		Estado: <?php echo GetSelectedOption('province', array(
 					array('value' => 'P', 'text' => 'Pendiente de inciar selección'),
 					array('value' => 'R', 'text' => 'Realizando selección'),
 					array('value' => 'S', 'text' => 'Seleccionado candidato'),
 					array('value' => 'C', 'text' => 'Cancelada'),
-				),
-				$offer->state, 
-				false) 
-		?>
+				), $offer->state); ?>
+		
 	</label>
 </div>
 
 <div>
 	<label>
-		Fecha de creacion de la oferta:
-		<input type="text" name="dateCreation" value="<?=$offer->dateCreation?>" readonly="readonly"/>
+		Fecha de comunicacion: <?php echo $offer->dateComunication; ?>
 	</label>
 </div>
 
 <div>
 	<label>
-		Fecha de comunicacion:
-		<input type="text" name="dateComunication" value="<?=$offer->dateComunication?>" readonly="readonly"/>
+		Psicologo encargado: <?php echo $offer->psicologist; ?>
 	</label>
 </div>
 
 <div>
 	<label>
-		Psicologo encargado:
-		<input type="text" name="psicologist" value="<?=$offer->psicologist?>" readonly="readonly"/>
+		Candidato seleccionado: <?php echo $offer->candidate; ?>
 	</label>
 </div>
 
 <div>
 	<label>
-		Candidato seleccionado:
-		<input type="text" name="candidate" value="<?=$offer->candidate?>" readonly="readonly"/>
-	</label>
-</div>
-
-<div>
-	<label>
-		Otros datos candidato:
-		<input type="text" name="notes" value="<?=$offer->notes?>" readonly="readonly"/>
+		Otros datos candidato: <?php echo $offer->notes; ?>
 	</label>
 </div>
 

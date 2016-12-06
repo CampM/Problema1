@@ -1,4 +1,10 @@
 <?php
+/**
+ * Clase de usuario
+ * @author 2DAW
+ *
+ */
+
 class UserModel{
 
 	public $id;

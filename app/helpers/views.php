@@ -29,6 +29,7 @@ function & LoadView($vista, array  $variablesDeVista=NULL)
 	return $html;
 }
 
+//Cargar vista para layout con menos parametros
 function & LoadLayout($title, $body)
 {
     $ficheroVista='templates/layout';

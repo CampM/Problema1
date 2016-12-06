@@ -3,10 +3,12 @@
 // definimos constantes que facilitan el trabajo
 define('SITE', 'http://localhost/Problema1/app/');
 define('INDEX_PATH', SITE.'index.php');
+//define('ERROR_PATH', SITE.'index.php?'.CTRL_VAR.'='.CTRL_ERROR);
 
 define('CTRL_PATH', __DIR__.'/controllers/');
 define('MODEL_PATH', __DIR__.'/models/');
 define('VIEW_PATH', __DIR__.'/views/');
+define('VIEW_TEMPLATE_PATH', VIEW_PATH.'templates/');
 //define('TEMPLATE_PATH', __DIR__.'/plantilla/');
 //define('LIB_PATH', __DIR__.'/lib/');
 define('HELPERS_PATH', __DIR__.'/helpers/');
@@ -18,6 +20,11 @@ DEFINE('CTRL_ADD', '2');
 DEFINE('CTRL_EDIT', '3');
 DEFINE('CTRL_INFO', '4');
 DEFINE('CTRL_DELETE', '5');
+DEFINE('CTRL_CLOSE', '6');
+DEFINE('CTRL_ERROR', '7');
+
+define('ERROR_PATH', SITE.'index.php?'.CTRL_VAR.'='.CTRL_ERROR);  
+
 
 $actionMap=array(
     CTRL_HOME=>'listOfferController',
@@ -25,8 +32,10 @@ $actionMap=array(
     CTRL_EDIT=>'editOfferController',
     CTRL_INFO=>'infoOfferController',
     CTRL_DELETE=>'deleteOfferController',
+    CTRL_CLOSE=>'closeSessionController',
+    CTRL_ERROR=>'errorController',
 );
-        
+      
 // Cuerpo del controlador frontal
 include_once MODEL_PATH.'functionsDB.php';
 include_once HELPERS_PATH.'views.php';
@@ -49,12 +58,13 @@ if (isset($_SESSION['UserInfo'])){
         }
         else
         {   
-            // Error 404
+            header('location: '.ERROR_PATH.'&e=404');
            echo LoadLayout('Página no encontrada', 'Error 404: Pagina no encontrada');
         }
     }
     else 
     {
+        header('location: '.ERROR_PATH.'&e=404');
         // Error 404
        echo LoadLayout('Página no encontrada', 'Error 404: Pagina no encontrada');
     }

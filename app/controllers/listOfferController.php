@@ -1,7 +1,10 @@
 <?php 
+/**
+ * Controlador encargado de la lista de ofertas
+ */
 include_once MODEL_PATH.'functionsDB.php';
 
-//Controlador encargado de la lista de ofertas
+
 if (isset($_POST['filterSearch'])){
     $offerList = FilterAllOffer();
 } 
