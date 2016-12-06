@@ -4,13 +4,6 @@
  * @var array $db_conf
  */
 
-$db_conf=array(
-		'servidor'=>'localhost',
-		'usuario'=>'root',
-		'password'=>'',
-		'base_datos'=>'joboffer'
-);
-
 class DataBaseProvider{
 	
 		

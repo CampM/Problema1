@@ -4,30 +4,61 @@
  */
 include_once MODEL_PATH.'functionsDB.php';
 
+if (!isset($_SESSION['offerSetting'])){
+    $_SESSION['offerSetting'] = array(
+    	'currentPage' => 0,
+    	'orderPage' => '',
+    	'filterPage' => array(
+    		 'dateType' => '',
+    		 'dateCreation' => '',
+    		 'descType' => '',
+    		 'desc' => '',
+    		 'stateType' => '',
+    		 'state' => '',
+    		)
+    	);
+} 
 
-if (isset($_POST['filterSearch'])){
-    $offerList = FilterAllOffer();
-} 
-else
+
+if (isset($_GET['page']))
 {
-    $offerList = ConsultAllOffer();
+	$_SESSION['offerSetting']['currentPage'] = $_GET['page'];
+}
+if (isset($_GET['order']))
+{
+	$_SESSION['offerSetting']['orderPage'] = $_GET['order'];
+}
+
+if (isset($_POST['filterSearch']))
+{
+	$_SESSION['offerSetting']['filterPage']['dateType'] = $_POST['dateCreationTypeFilter'];
+	$_SESSION['offerSetting']['filterPage']['dateCreation'] = $_POST['dateCreationFilter'];
+	$_SESSION['offerSetting']['filterPage']['descType'] = $_POST['descriptionTypeFilter'];
+	$_SESSION['offerSetting']['filterPage']['desc'] = $_POST['descriptionFilter'];
+	$_SESSION['offerSetting']['filterPage']['stateType'] = $_POST['stateTypeFilter'];
+    $_SESSION['offerSetting']['filterPage']['state'] = $_POST['stateFilter'];
+    $_SESSION['offerSetting']['currentPage'] = 0;
 } 
+
+if (isset($_POST['resetSearch']))
+{
+    $_SESSION['offerSetting']['filterPage']['dateType'] = '';
+    $_SESSION['offerSetting']['filterPage']['dateCreation'] = '';
+    $_SESSION['offerSetting']['filterPage']['descType'] = '';
+    $_SESSION['offerSetting']['filterPage']['desc'] = '';
+    $_SESSION['offerSetting']['filterPage']['stateType'] = '';
+    $_SESSION['offerSetting']['filterPage']['state'] = '';
+    $_SESSION['offerSetting']['currentPage'] = 0;
+} 
+
+	
+$listOfferData = ConsultAllOffer($_SESSION['offerSetting']);
 
 echo LoadLayout(
 	'Listado de ofertas',
-	LoadView('listOfferView', array('offerList' => $offerList))
+	LoadView('listOfferView', array('listOfferData' => $listOfferData))
 	)
 
 
-/*
-
-	TODO POR GET
-	Si por get me llegan variables tipo filterDesc, filterProvince --> decidir si filtramos o no.
-	Las columnas de la tabla (cabecera) sera un enlace con ord=desc, ord=province
-	Tambien llegara una "pag" con el numero de la pagina. 
-
-	Todos los enlaces (de paginacion o de ordenacion) deben contener toda la informacion tanto de filtro, como de pagina a cargar como de ordenacion
-
-*/
 
 ?>

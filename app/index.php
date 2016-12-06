@@ -3,6 +3,7 @@
 // definimos constantes que facilitan el trabajo
 define('SITE', 'http://localhost/Problema1/app/');
 define('INDEX_PATH', SITE.'index.php');
+define('CONFIG_PATH', __DIR__.'/config.php');
 //define('ERROR_PATH', SITE.'index.php?'.CTRL_VAR.'='.CTRL_ERROR);
 
 define('CTRL_PATH', __DIR__.'/controllers/');
@@ -37,6 +38,7 @@ $actionMap=array(
 );
       
 // Cuerpo del controlador frontal
+include_once CONFIG_PATH;
 include_once MODEL_PATH.'functionsDB.php';
 include_once HELPERS_PATH.'views.php';
 

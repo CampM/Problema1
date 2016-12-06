@@ -90,6 +90,11 @@ function GetOfferErrors($offer){
 			array_push($error, 'Fecha de comunicacion debe ser mayor que el dia actual.');
 		}
 
+		if(!ValidateRequired($offer->province))
+		{
+			array_push($error, 'Provincia es un campo obligatorio.');
+		}
+
 		return $error;
 }
 

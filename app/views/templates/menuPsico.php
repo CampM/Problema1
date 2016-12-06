@@ -8,9 +8,9 @@
 	$urlCloseSesion = '?'.CTRL_VAR.'='.CTRL_CLOSE;
 ?>
 
-<ul>
+<div class="div-menu">
     <!--Listado de ofertas -->
-    <li><a href="<?=$urlOfferList?>">Listado de ofertas</a></li>
+    <a href="<?=$urlOfferList?>">Listado de ofertas</a>
     <!--Cerrar sesion -->
-    <li><a href="<?=$urlCloseSesion?>">Cerrar sesión</a></li>
-</ul>
+    <a href="<?=$urlCloseSesion?>">Cerrar sesión</a>
+</div>

@@ -12,88 +12,130 @@
 	</label>
 </div>
 
-<div>
-	<label>
-		Descripcion: <?php echo $offer->description; ?>
-	</label>
+
+<div class="row">
+	<div class="col-md-3 form-group">
+		<label>
+			Descripcion:
+		</label>
+		<div class="form-control">
+			<?php echo $offer->description; ?>
+		</div>
+	</div>
+	<div class="col-md-3 form-group">
+		<label>
+			Persona de contacto:
+		</label>
+		<div class="form-control">
+			<?php echo $offer->contact; ?>
+		</div>
+	</div>
 </div>
 
-<div>
-	<label>
-		Persona de contacto: <?php echo $offer->contact; ?>
-	</label>
+<div class="row">
+	<div class="col-md-3 form-group">
+		<label>
+			Telefono de contacto:
+		</label>
+		<div class="form-control">
+			<?php echo $offer->contactTLF; ?>
+		</div>
+	</div>
+	<div class="col-md-3 form-group">
+		<label>
+			Correro electronico:
+		</label>
+		<div class="form-control">
+			<?php echo $offer->contactMail; ?>
+		</div>
+	</div>
 </div>
 
-<div>
-	<label>
-		Telefono de contacto: <?php echo $offer->contactTLF; ?>
-	</label>
+<div class="row">
+	<div class="col-md-3 form-group">
+		<label>
+			Direccion:
+		</label>
+		<div class="form-control">
+			<?php echo $offer->address; ?>
+		</div>
+	</div>
+	<div class="col-md-3 form-group">
+		<label>
+			Poblacion:
+		</label>
+		<div class="form-control">
+			<?php echo $offer->assentament; ?>
+		</div>
+	</div>
 </div>
 
-<div>
-	<label> 
-		Correro electronico: <?php echo $offer->contactMail; ?>
-	</label>
+<div class="row">
+	<div class="col-md-3 form-group">
+		<label>
+			Codigo Postal:
+		</label>
+		<div class="form-control">
+			<?php echo $offer->postCode; ?>
+		</div>
+	</div>
+	<div class="col-md-3 form-group">
+		<label>
+			Provincia:
+		</label>
+		<div class="form-control">
+			<?php echo GetSelectedOption('province', $provinceList, $offer->province); ?>
+		</div>
+	</div>
 </div>
 
-<div>
-	<label>
-		Direccion: <?php echo $offer->address; ?>
-	</label>
+<div class="row">
+	<div class="col-md-3 form-group">
+		<label>
+			Otros datos candidato:
+		</label>
+		<div class="form-control">
+			<?php echo $offer->notes; ?>
+		</div>
+	</div>
+	<div class="col-md-3 form-group">
+		<label>
+			Fecha de comunicacion:
+		</label>
+		<div class="form-control">
+			<?php echo $offer->dateComunication; ?>
+		</div>
+	</div>
 </div>
 
-<div>
-	<label>
-		Poblacion: <?php echo $offer->assentament; ?>
-	</label>
+<div class="row">
+	<div class="col-md-3 form-group">
+		<label>
+			Psicologo encargado:
+		</label>
+		<div class="form-control">
+			<?php echo $offer->psicologist; ?>
+		</div>
+	</div>
+	<div class="col-md-3 form-group">
+		<label>
+			Candidato seleccionado:
+		</label>
+		<div class="form-control">
+			<?php echo $offer->candidate; ?>
+		</div>
+	</div>
 </div>
 
-<div>
-	<label>
-		Codigo Postal: <?php echo $offer->postCode; ?>
-	</label>
-</div>
-
-<div>
-	<label>
-		Provincia: <?php echo GetSelectedOption('province', $provinceList, $offer->province); ?>
-	</label>
-</div>
-
-<div>
-	<label>
-		Estado: <?php echo GetSelectedOption('province', array(
-					array('value' => 'P', 'text' => 'Pendiente de inciar selección'),
-					array('value' => 'R', 'text' => 'Realizando selección'),
-					array('value' => 'S', 'text' => 'Seleccionado candidato'),
-					array('value' => 'C', 'text' => 'Cancelada'),
-				), $offer->state); ?>
-		
-	</label>
-</div>
-
-<div>
-	<label>
-		Fecha de comunicacion: <?php echo $offer->dateComunication; ?>
-	</label>
-</div>
-
-<div>
-	<label>
-		Psicologo encargado: <?php echo $offer->psicologist; ?>
-	</label>
-</div>
-
-<div>
-	<label>
-		Candidato seleccionado: <?php echo $offer->candidate; ?>
-	</label>
-</div>
-
-<div>
-	<label>
-		Otros datos candidato: <?php echo $offer->notes; ?>
-	</label>
+<div class="row">
+	<div class="col-md-3 form-group">
+		<label>
+			Estado:
+		</label>
+		<div class="form-control">
+			<?php echo GetSelectedOption('province', $GLOBALS['offerStates'], $offer->state); ?>
+		</div>
+	</div>
 </div>
 
 <a href="<?=INDEX_PATH?>">Volver</a>

@@ -5,7 +5,7 @@
 
 include_once MODEL_PATH.'offerModel.php';
 include_once MODEL_PATH.'functionsDB.php';
-include_once HELPERS_PATH.'validations.php';
+include_once CTRL_PATH.'validations.php';
 
 if ($_SESSION['UserInfo']->IsAdmin())
 {
@@ -24,6 +24,11 @@ if ($_SESSION['UserInfo']->IsAdmin())
 		if (count($errors) == 0)
 		{
 			$isOk = InsertOffer($offer);
+
+			for ($i=0; $i < 50; $i++) { 
+				$offer->description = $offer->description . $i;
+				$isOk = InsertOffer($offer);
+			}
 			if ($isOk){
 				//Reedireccion del navegador
 				header('location: '.INDEX_PATH);

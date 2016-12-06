@@ -3,10 +3,12 @@
  * Funciones para trabajar con la capa de abstraccion de base de datos
  */
 
-include_once './Models/DataBaseProvider.php';
-include_once './Models/OfferModel.php';
-include_once './Models/UserModel.php';
+include_once MODEL_PATH.'DataBaseProvider.php';
+include_once MODEL_PATH.'OfferModel.php';
+include_once MODEL_PATH.'UserModel.php';
 include_once HELPERS_PATH.'format.php';
+include_once CTRL_PATH.'validations.php';
+
 
 
 /**
@@ -35,10 +37,26 @@ function DoLogin($user, $pass){
 /**
  * Devuelve todos los registros de ofertas de la base de datos ordenados por fecha de creacion
  */
-function ConsultAllOffer(){
+function ConsultAllOffer($offerSetting){
 
-	$sql = 'select * from offer order by DateCreation';
+	$pageSize = $GLOBALS['pageSize'];
+	$pageShow = $GLOBALS['pageShow'];
+
+	$conditionSql = GetOfferCondition($offerSetting['filterPage']);
+
 	$db = DataBaseProvider::getInstance();
+
+	$resCount = $db->Consulta('select count(*) as total from offer ' . $conditionSql);
+	$countReg = $db->LeeRegistro($resCount);
+
+	$total = $countReg['total'];
+
+	$skipElements = $offerSetting['currentPage'] * $pageSize;
+	
+	$orderSql = GetOfferOrderSQL($offerSetting['orderPage']);
+
+	$sql = 'select * from offer ' . $conditionSql . $orderSql . ' limit '.$skipElements.','.$pageSize;
+
 	$result = $db->Consulta($sql);
 
 	$offerList = array(); 
@@ -52,7 +70,40 @@ function ConsultAllOffer(){
 
 	}
 
-	return $offerList;
+	$lastPage = ceil($total / $pageSize) - 1;
+
+	$prevPage = $offerSetting['currentPage'] - 1;
+	if ($prevPage < 0){
+		$prevPage = 0;
+	}
+	$nextPage = $offerSetting['currentPage'] + 1;
+	if ($nextPage > $lastPage){
+		$nextPage = $lastPage;
+	}
+
+	$pageFirstShow = $offerSetting['currentPage'] - $pageShow;
+	if ($pageFirstShow < 0){
+		$pageFirstShow = 0;
+	}
+	$pageLastShow = $offerSetting['currentPage'] + $pageShow;
+	if ($pageLastShow > $lastPage){
+		$pageLastShow = $lastPage;
+	}
+
+	$result = array(
+		'list' => $offerList,
+		'total' => $total,
+		'prevPage' => $prevPage,
+		'currentPage' => $offerSetting['currentPage'],
+		'nextPage' => $nextPage,
+		'lastPage' => $lastPage,
+		'pageFirstShow' => $pageFirstShow,
+		'pageLastShow' => $pageLastShow,
+		'orderPage' => $offerSetting['orderPage'],
+		'filterPage' => $offerSetting['filterPage'],
+	);
+
+	return $result;
 }
 
 
@@ -60,45 +111,52 @@ function ConsultAllOffer(){
  * Devuelve condiciones para los filtrados de ofertas
  * @return string
  */
-function GetOfferCondition(){
-	$condition = '1=1';
-	if (isset($_POST['descriptionFilter'])){
-		$condition = $condition . ' and Description like "%'.addslashes($_POST['descriptionFilter']).'%"';
-	}
+function GetOfferCondition($filters){
 
-	if (isset($_POST['contactFilter'])){
-		$condition = $condition . ' and Contact like "%'.addslashes($_POST['contactFilter']).'%"';
-	}
+	$condition = ' where 1 = 1 ';
 
-	if (isset($_POST['candidateFilter'])){
-		$condition = $condition . ' and Candidate like "%'.addslashes($_POST['candidateFilter']).'%"';
-	}
-	return $condition;
-}
-
-/**
- * Devuelve todos los registros de ofertas en la base de datos que cumplan las condiciones de filtrado
- */
-function FilterAllOffer(){
-	
-	$condition = GetOfferCondition();
-	$sql = 'select * from offer where '. $condition;
-	$db = DataBaseProvider::getInstance();
-	$result = $db->Consulta($sql);
-
-	$offerList = array(); 
-
-	while ($reg = $db->LeeRegistro())
+	if (($filters['dateCreation'] != null) && ($filters['dateCreation'] != '') && ValidateDate($filters['dateCreation']))
 	{
-		$offer = ConvertToOffer($reg);
-
-		//Añadir la oferta a la lista de ofertas a mostrar
-		array_push($offerList, $offer);
-
+		$dateFormated = ConvertToBBDDDate($filters['dateCreation']);
+		switch ($filters['dateType']) {
+			case 'greater':
+				$condition = $condition . ' AND DateCreation > "' . addslashes($dateFormated) . '"';
+				break;
+			case 'lesser':
+				$condition = $condition . ' AND DateCreation < "' . addslashes($dateFormated) . '"';
+				break;
+			default:
+				$condition = $condition . ' AND DateCreation = "' . addslashes($dateFormated) . '"';
+				break;
+		}
+	}
+	if (($filters['desc'] != null) && ($filters['desc'] != ''))
+	{
+		if ($filters['descType'] == 'equal')
+		{
+			$condition = $condition . ' AND Description = "' . addslashes($filters['desc']) . '"';
+		}
+		else
+		{
+			$condition = $condition . ' AND Description like "%' . addslashes($filters['desc']) . '%"';
+		}
+	}
+	if (($filters['state'] != null) && ($filters['state'] != ''))
+	{
+		if ($filters['stateType'] == 'distinct')
+		{
+			$condition = $condition . ' AND State <> ' . addslashes($filters['state']);
+		}
+		else
+		{
+			$condition = $condition . ' AND State = ' . addslashes($filters['state']);
+		}
 	}
 
-	return $offerList;
+	return $condition . ' ';
 }
+
+
 
 /**
  * Inserta el registro de una oferta y devuelve si fue opsible hacerlo
@@ -245,5 +303,27 @@ function ConvertToUser($reg){
 	$user = new UserModel($reg['Id'], $reg['Name'], $reg['UserType'], $reg['Username'], $reg['Pass']);
 
 	return $user;
+}
+
+function GetOfferOrderSQL($orderColumn){
+
+	$order = 'DateCreation';
+
+	switch ($orderColumn) {
+		case 'dateCreation':
+			$order = 'DateCreation';
+			break;
+		case 'description':
+			$order = 'Description';
+			break;
+		case 'contact':
+			$order = 'Contact';
+			break;
+		default:
+			$order = 'DateCreation';
+			break;
+	}
+
+	return ' order by ' . $order . ' ';
 }
 ?>

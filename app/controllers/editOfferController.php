@@ -7,7 +7,7 @@
 
 include_once MODEL_PATH.'offerModel.php';
 include_once MODEL_PATH.'functionsDB.php';
-include_once HELPERS_PATH.'validations.php';
+include_once CTRL_PATH.'validations.php';
 
 $errors = array();
 

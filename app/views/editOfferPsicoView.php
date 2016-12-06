@@ -8,129 +8,169 @@
 ?>
 
 <div>
-
-	<div>
-		<label>
-			Fecha de creacion de la oferta: <?php echo $offer->dateCreation; ?>
-		</label>
-	</div>
-
-	<div>
-		<label>
-			Descripcion: <?php echo $offer->description; ?>
-		
-		</label>
-	</div>
-
-	<div>
-		<label>
-			Persona de contacto: <?php echo $offer->contact; ?>
-
-		</label>
-	</div>
-
-	<div>
-		<label>
-			Telefono de contacto: <?php echo $offer->contactTLF; ?>
-		</label>
-	</div>
-
-	<div>
-		<label> 
-			Correro electronico: <?php echo $offer->contactMail; ?>
-		</label>
-	</div>
-
-	<div>
-		<label>
-			Direccion: <?php echo $offer->address; ?>
-		</label>
-	</div>
-
-	<div>
-		<label>
-			Poblacion: <?php echo $offer->assentament; ?>
-		</label>
-	</div>
-
-	<div>
-		<label>
-			Codigo Postal: <?php echo $offer->postCode; ?>
-		</label>
-	</div>
-
-	<div>
-		<label>
-			Provincia: <?php echo GetSelectedOption('province', $provinceList, $offer->province); ?>
-		</label>
-	</div>
-
-	<div>
-		<label>
-			Fecha de comunicacion: <?php echo $offer->dateComunication; ?>
-		</label>
-	</div>
-
-	<div>
-		<label>
-			Psicologo encargado: <?php echo $offer->psicologist; ?>
-		</label>
-	</div>
-
+	<label>
+		Fecha de creacion de la oferta: <?php echo $offer->dateCreation; ?>
+	</label>
 </div>
 
-<div>
-	<form action="" method="post">
+<div class="row">
+	<div class="col-md-6">
+		
+		<form class="offerForm" action="" method="post">
 
-		<input type="hidden" name="id" value="<?=$offer->id?>"/>
+			<input type="hidden" name="id" value="<?=$offer->id?>"/>
 
-		<?php
-		//Para mostrar los errores generados en los campos de la oferta
-			if (count($errors) > 0)
-			{
-				echo '<ul class="errorList">';
-				foreach ($errors as $error) 
+			<?php
+			//Para mostrar los errores generados en los campos de la oferta
+				if (count($errors) > 0)
 				{
-					echo "<li>$error</li>";
+					echo '<ul class="errorList">';
+					foreach ($errors as $error) 
+					{
+						echo "<li>$error</li>";
+					}
+					echo '</ul>';
 				}
-				echo '</ul>';
-			}
-		?>
+			?>
 
-		<div>
-			<label>
-				Estado:
-				<?= 
-					InputsRadio(
-						'state', 
-						array(
-							array('value' => 'P', 'text' => 'Pendiente de inciar selección'),
-							array('value' => 'R', 'text' => 'Realizando selección'),
-							array('value' => 'S', 'text' => 'Seleccionado candidato'),
-							array('value' => 'C', 'text' => 'Cancelada'),
-						),
-						$offer->state);
-				?>
-			</label>
-		</div>
 
-		<div>
-			<label>
-				Candidato seleccionado:
-				<?= InputCreator('text', 'candidate', $offer->candidate); ?>
-				
-			</label>
-		</div>
+			<div class="row">
+				<div class="col-md-6 form-group">
+					<label for="candidate">
+						Candidato seleccionado:
+					</label>
+					<?= InputCreator('text', 'candidate', $offer->candidate); ?>
+				</div>
+				<div class="col-md-6 form-group">
+					<label for="notes"> 
+						Otros datos candidato:
+					</label>
+					<?= InputCreator('text', 'notes', $offer->notes); ?>
+				</div>
+			</div>
 
-		<div>
-			<label>
-				Otros datos candidato:
-				<?= InputCreator('text', 'notes', $offer->notes); ?>
-				
-			</label>
-		</div>
-		
-		<input type="submit" value="Enviar"/>
-	</form>
+
+			<div class="row">
+				<div class="col-md-12 form-group">
+					<label for="state">
+						Estado:
+					</label>
+					<?= 
+						InputsRadio(
+							'state', 
+							$GLOBALS['offerStates'],
+							$offer->state);
+					?>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<input class="btn btn-default" type="submit" value="Enviar"/>
+				</div>
+			</div>
+
+		</form>
+	</div>
 </div>
 
+
+<div class="row">
+	<div class="col-md-6">
+
+		<div class="row">
+			<div class="col-md-6 form-group">
+				<label>
+					Descripcion:
+				</label>
+				<div class="form-control">
+					<?php echo $offer->description; ?>
+				</div>
+			</div>
+			<div class="col-md-6 form-group">
+				<label>
+					Persona de contacto:
+				</label>
+				<div class="form-control">
+					<?php echo $offer->contact; ?>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6 form-group">
+				<label>
+					Telefono de contacto:
+				</label>
+				<div class="form-control">
+					<?php echo $offer->contactTLF; ?>
+				</div>
+			</div>
+			<div class="col-md-6 form-group">
+				<label>
+					Correro electronico:
+				</label>
+				<div class="form-control">
+					<?php echo $offer->contactMail; ?>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6 form-group">
+				<label>
+					Direccion:
+				</label>
+				<div class="form-control">
+					<?php echo $offer->address; ?>
+				</div>
+			</div>
+			<div class="col-md-6 form-group">
+				<label>
+					Poblacion:
+				</label>
+				<div class="form-control">
+					<?php echo $offer->assentament; ?>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6 form-group">
+				<label>
+					Codigo Postal:
+				</label>
+				<div class="form-control">
+					<?php echo $offer->postCode; ?>
+				</div>
+			</div>
+			<div class="col-md-6 form-group">
+				<label>
+					Provincia:
+				</label>
+				<div class="form-control">
+					<?php echo GetSelectedOption('province', $provinceList, $offer->province); ?>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6 form-group">
+				<label>
+					Psicologo encargado:
+				</label>
+				<div class="form-control">
+					<?php echo $offer->psicologist; ?>
+				</div>
+			</div>
+			<div class="col-md-6 form-group">
+				<label>
+					Fecha de comunicacion:
+				</label>
+				<div class="form-control">
+					<?php echo $offer->dateComunication; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
