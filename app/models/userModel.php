@@ -12,15 +12,17 @@ class UserModel{
 	public $userType;
 	public $username;
 	public $pass;
+	public $pass2;
 
 	
-	function __construct($id = NULL, $name = NULL, $userType = NULL, $username = NULL, $pass = NULL){
+	function __construct($id = NULL, $name = NULL, $userType = NULL, $username = NULL, $pass = NULL, $pass2 = NULL){
 
 		$this->id = $id;
 		$this->name = $name;
 		$this->userType = $userType;
 		$this->username = $username;
 		$this->pass = $pass;
+		$this->pass2 = $pass2;
 		
 	}
 
@@ -30,7 +32,7 @@ class UserModel{
 	 * @return boolean
 	 */
 	function IsAdmin(){
-		return $this->userType == 'admin';
+		return $this->userType == 'A';
 	}
 
 	/**
@@ -38,7 +40,7 @@ class UserModel{
 	 * @return boolean
 	 */
 	function IsPsicologist(){
-		return $this->userType == 'psicologist';
+		return $this->userType == 'P';
 	}
 
 

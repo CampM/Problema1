@@ -21,4 +21,9 @@ $offerStates = array(
 						array('value' => 'C', 'text' => 'Cancelada'),
 					);
 
+$userTypes = array(
+						array('value' => 'A', 'text' => 'Administrador'),
+						array('value' => 'P', 'text' => 'Psicólogo'),
+					);
+
 ?>

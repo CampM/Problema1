@@ -106,57 +106,71 @@ function ConsultAllOffer($offerSetting){
 	return $result;
 }
 
-
 /**
- * Devuelve condiciones para los filtrados de ofertas
- * @return string
+ * Devuelve todos los registros de ofertas de la base de datos ordenados por fecha de creacion
  */
-function GetOfferCondition($filters){
+function ConsultAllUser($userSetting){
 
-	$condition = ' where 1 = 1 ';
+	$pageSize = $GLOBALS['pageSize'];
+	$pageShow = $GLOBALS['pageShow'];
 
-	if (($filters['dateCreation'] != null) && ($filters['dateCreation'] != '') && ValidateDate($filters['dateCreation']))
+	$db = DataBaseProvider::getInstance();
+
+	$resCount = $db->Consulta('select count(*) as total from user');
+	$countReg = $db->LeeRegistro($resCount);
+
+	$total = $countReg['total'];
+
+	$skipElements = $userSetting['currentPage'] * $pageSize;
+	
+	$sql = 'select * from user limit '.$skipElements.','.$pageSize;
+
+	$result = $db->Consulta($sql);
+
+	$userList = array(); 
+
+	while ($reg = $db->LeeRegistro())
 	{
-		$dateFormated = ConvertToBBDDDate($filters['dateCreation']);
-		switch ($filters['dateType']) {
-			case 'greater':
-				$condition = $condition . ' AND DateCreation > "' . addslashes($dateFormated) . '"';
-				break;
-			case 'lesser':
-				$condition = $condition . ' AND DateCreation < "' . addslashes($dateFormated) . '"';
-				break;
-			default:
-				$condition = $condition . ' AND DateCreation = "' . addslashes($dateFormated) . '"';
-				break;
-		}
-	}
-	if (($filters['desc'] != null) && ($filters['desc'] != ''))
-	{
-		if ($filters['descType'] == 'equal')
-		{
-			$condition = $condition . ' AND Description = "' . addslashes($filters['desc']) . '"';
-		}
-		else
-		{
-			$condition = $condition . ' AND Description like "%' . addslashes($filters['desc']) . '%"';
-		}
-	}
-	if (($filters['state'] != null) && ($filters['state'] != ''))
-	{
-		if ($filters['stateType'] == 'distinct')
-		{
-			$condition = $condition . ' AND State <> ' . addslashes($filters['state']);
-		}
-		else
-		{
-			$condition = $condition . ' AND State = ' . addslashes($filters['state']);
-		}
+		$user = ConvertToUser($reg);
+
+		//Añadir la oferta a la lista de ofertas a mostrar
+		array_push($userList, $user);
+
 	}
 
-	return $condition . ' ';
+	$lastPage = ceil($total / $pageSize) - 1;
+
+	$prevPage = $userSetting['currentPage'] - 1;
+	if ($prevPage < 0){
+		$prevPage = 0;
+	}
+	$nextPage = $userSetting['currentPage'] + 1;
+	if ($nextPage > $lastPage){
+		$nextPage = $lastPage;
+	}
+
+	$pageFirstShow = $userSetting['currentPage'] - $pageShow;
+	if ($pageFirstShow < 0){
+		$pageFirstShow = 0;
+	}
+	$pageLastShow = $userSetting['currentPage'] + $pageShow;
+	if ($pageLastShow > $lastPage){
+		$pageLastShow = $lastPage;
+	}
+
+	$result = array(
+		'list' => $userList,
+		'total' => $total,
+		'prevPage' => $prevPage,
+		'currentPage' => $userSetting['currentPage'],
+		'nextPage' => $nextPage,
+		'lastPage' => $lastPage,
+		'pageFirstShow' => $pageFirstShow,
+		'pageLastShow' => $pageLastShow,
+	);
+
+	return $result;
 }
-
-
 
 /**
  * Inserta el registro de una oferta y devuelve si fue opsible hacerlo
@@ -168,6 +182,14 @@ function InsertOffer($offer){
 
 	$db = DataBaseProvider::getInstance();
 	$isOk = $db->Insertar('offer', $offerArray);
+	return $isOk;
+}
+
+function InsertUser($user){
+	$userArray = ConvertUserToSql($user);
+
+	$db = DataBaseProvider::getInstance();
+	$isOk = $db->Insertar('user', $userArray);
 	return $isOk;
 }
 
@@ -184,6 +206,14 @@ function ModifyOffer($offer){
 	return $isOk;
 }
 
+function ModifyUser($user){
+	$userArray = ConvertUserToSql($user);
+
+	$db = DataBaseProvider::getInstance();
+	$isOk = $db->Modificar('user', $userArray, 'Id = '.$user->id.'');
+	return $isOk;
+}
+
 /**
  * Elimina el registro de una oferta y devuelve si fue opsible hacerlo
  * @param unknown $offerId
@@ -196,13 +226,19 @@ function DeleteOfferById($offerId){
 	return $isOk;
 }
 
+function DeleteUserById($userId){
+
+	$db = DataBaseProvider::getInstance();
+	$isOk = $db->Eliminar('user', 'Id = '.$userId.'');
+	return $isOk;
+}
+
 /**
  * Devuelve el registro completo de una oferta en base a su id si es posible o null sino existe
  * @param unknown $offerId
  * @return NULL|OfferModel
  */
 function ConsultOfferById($offerId){
-	$sql = 'select * from offer';
 	$db = DataBaseProvider::getInstance();
 	$reg = $db->LeeUnRegistro('offer', 'Id = '.$offerId.'');
 
@@ -213,6 +249,19 @@ function ConsultOfferById($offerId){
 	}
 
 	return $offer;
+}
+
+function ConsultUserById($userId){
+	$db = DataBaseProvider::getInstance();
+	$reg = $db->LeeUnRegistro('user', 'Id = '.$userId.'');
+
+	$user = NULL;
+
+	if ($reg != NULL){
+		$user = ConvertToUser($reg);
+	}
+
+	return $user;
 }
 
 /**
@@ -293,6 +342,18 @@ function ConvertOfferToSql($offer){
 	return $offerArray;
 }
 
+function ConvertUserToSql($user){
+
+	$userArray = array(
+		'Name' => $user->name,
+		'Username' => $user->username,
+		'UserType' => $user->userType,
+		'Pass' => $user->pass,
+	);
+
+	return $userArray;
+}
+
 
 /**
  * Devuelve los datos de registro de un usuario convertidos segun el modelo de usuario
@@ -300,7 +361,7 @@ function ConvertOfferToSql($offer){
  * @return UserModel
  */
 function ConvertToUser($reg){
-	$user = new UserModel($reg['Id'], $reg['Name'], $reg['UserType'], $reg['Username'], $reg['Pass']);
+	$user = new UserModel($reg['Id'], $reg['Name'], $reg['UserType'], $reg['Username'], $reg['Pass'], $reg['Pass']);
 
 	return $user;
 }
@@ -326,4 +387,54 @@ function GetOfferOrderSQL($orderColumn){
 
 	return ' order by ' . $order . ' ';
 }
+
+/**
+ * Devuelve condiciones para los filtrados de ofertas
+ * @return string
+ */
+function GetOfferCondition($filters){
+
+	$condition = ' where 1 = 1 ';
+
+	if (($filters['dateCreation'] != null) && ($filters['dateCreation'] != '') && ValidateDate($filters['dateCreation']))
+	{
+		$dateFormated = ConvertToBBDDDate($filters['dateCreation']);
+		switch ($filters['dateType']) {
+			case 'greater':
+				$condition = $condition . ' AND DateCreation > "' . addslashes($dateFormated) . '"';
+				break;
+			case 'lesser':
+				$condition = $condition . ' AND DateCreation < "' . addslashes($dateFormated) . '"';
+				break;
+			default:
+				$condition = $condition . ' AND DateCreation = "' . addslashes($dateFormated) . '"';
+				break;
+		}
+	}
+	if (($filters['desc'] != null) && ($filters['desc'] != ''))
+	{
+		if ($filters['descType'] == 'equal')
+		{
+			$condition = $condition . ' AND Description = "' . addslashes($filters['desc']) . '"';
+		}
+		else
+		{
+			$condition = $condition . ' AND Description like "%' . addslashes($filters['desc']) . '%"';
+		}
+	}
+	if (($filters['state'] != null) && ($filters['state'] != ''))
+	{
+		if ($filters['stateType'] == 'distinct')
+		{
+			$condition = $condition . ' AND State <> ' . addslashes($filters['state']);
+		}
+		else
+		{
+			$condition = $condition . ' AND State = ' . addslashes($filters['state']);
+		}
+	}
+
+	return $condition . ' ';
+}
+
 ?>

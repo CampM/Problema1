@@ -9,7 +9,7 @@
 
 <div class="row">
 	<div class="col-md-6">
-		<form class="offerForm" action="" method="post">
+		<form class="commonForm" action="" method="post">
 
 			<input type="hidden" name="id" value="<?=$offer->id?>"/>
 

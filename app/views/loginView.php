@@ -33,7 +33,7 @@
 	    	</div>
 	    </div>
 
-	    <footer">
+	    <footer></footer>>
 	        Moises Campon Garcia (c)
 	    </footer>
 	</body>

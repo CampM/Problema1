@@ -24,6 +24,15 @@ if(isset($_GET['e']))
 		case '500.3':
 			$message = 'Error interno del servidor. Permisos insuficientes.';
 			break;
+		case '500.4':
+			$message = 'Error interno del servidor. El usuario no existe.';
+			break;
+		case '500.5':
+			$message = 'Error interno del servidor. Error en el guardado del usuario.';
+			break;
+		case '500.6':
+			$message = 'Error interno del servidor. No puede borrar usuarios superadministradores.';
+			break;
 		default:
 			$title = 'ERROR DESCONOCIDO';
 			break;

@@ -23,8 +23,12 @@ DEFINE('CTRL_INFO', '4');
 DEFINE('CTRL_DELETE', '5');
 DEFINE('CTRL_CLOSE', '6');
 DEFINE('CTRL_ERROR', '7');
-
+DEFINE('CTRL_USERS', '8');
+DEFINE('CTRL_ADD_USER', '9');
+DEFINE('CTRL_EDIT_USER', '10');
+DEFINE('CTRL_DELETE_USER', '11');
 define('ERROR_PATH', SITE.'index.php?'.CTRL_VAR.'='.CTRL_ERROR);  
+define('USERS_PATH', SITE.'index.php?'.CTRL_VAR.'='.CTRL_USERS);
 
 
 $actionMap=array(
@@ -35,6 +39,10 @@ $actionMap=array(
     CTRL_DELETE=>'deleteOfferController',
     CTRL_CLOSE=>'closeSessionController',
     CTRL_ERROR=>'errorController',
+    CTRL_USERS=>'listUserController',
+    CTRL_ADD_USER=>'addUserController',
+    CTRL_EDIT_USER=>'editUserController',
+    CTRL_DELETE_USER=>'deleteUserController',
 );
       
 // Cuerpo del controlador frontal

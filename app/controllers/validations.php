@@ -98,4 +98,39 @@ function GetOfferErrors($offer){
 		return $error;
 }
 
+function GetUserErrors($user){
+		$error = array();
+
+		if(!ValidateRequired($user->name))
+		{
+			array_push($error, 'Nombre es un campo obligatorio.');
+		}
+
+		if(!ValidateRequired($user->username))
+		{
+			array_push($error, 'Nombre de usuario es un campo obligatorio.');
+		}
+
+		if(!ValidateRequired($user->userType))
+		{
+			array_push($error, 'Tipo de usuario es un campo obligatorio.');
+		}
+
+		if(!ValidateRequired($user->pass))
+		{
+			array_push($error, 'Contraseña es un campo obligatorio.');
+		}
+
+		if(!ValidateRequired($user->pass2))
+		{
+			array_push($error, 'Repetir contraseña es un campo obligatorio.');
+		}
+
+		if($user->pass != $user->pass2)
+		{
+			array_push($error, 'Las contraseñas no coinciden.');
+		}
+		return $error;
+}
+
 ?>
