@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class OfferModel</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+		</div>
+
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-DataBaseProvider.html">DataBaseProvider</a></li>
+				<li class="active"><a href="class-OfferModel.html">OfferModel</a></li>
+				<li><a href="class-UserModel.html">UserModel</a></li>
+			</ul>
+
+
+
+
+
+			<h3>Functions</h3>
+			<ul>
+				<li><a href="function-ConsultAllOffer.html">ConsultAllOffer</a></li>
+				<li><a href="function-ConsultAllUser.html">ConsultAllUser</a></li>
+				<li><a href="function-ConsultOfferById.html">ConsultOfferById</a></li>
+				<li><a href="function-ConsultProvince.html">ConsultProvince</a></li>
+				<li><a href="function-ConsultUserById.html">ConsultUserById</a></li>
+				<li><a href="function-ConvertOfferToSql.html">ConvertOfferToSql</a></li>
+				<li><a href="function-ConvertToBBDDDate.html">ConvertToBBDDDate</a></li>
+				<li><a href="function-ConvertToOffer.html">ConvertToOffer</a></li>
+				<li><a href="function-ConvertToSpanishDate.html">ConvertToSpanishDate</a></li>
+				<li><a href="function-ConvertToUser.html">ConvertToUser</a></li>
+				<li><a href="function-ConvertUserToSql.html">ConvertUserToSql</a></li>
+				<li><a href="function-DeleteOfferById.html">DeleteOfferById</a></li>
+				<li><a href="function-DeleteUserById.html">DeleteUserById</a></li>
+				<li><a href="function-DoLogin.html">DoLogin</a></li>
+				<li><a href="function-EditButton.html">EditButton</a></li>
+				<li><a href="function-GetOfferCondition.html">GetOfferCondition</a></li>
+				<li><a href="function-GetOfferErrors.html">GetOfferErrors</a></li>
+				<li><a href="function-GetOfferOrderSQL.html">GetOfferOrderSQL</a></li>
+				<li><a href="function-GetSelectedOption.html">GetSelectedOption</a></li>
+				<li><a href="function-GetUserErrors.html">GetUserErrors</a></li>
+				<li><a href="function-InputCreator.html">InputCreator</a></li>
+				<li><a href="function-InputRadio.html">InputRadio</a></li>
+				<li><a href="function-InputsRadio.html">InputsRadio</a></li>
+				<li><a href="function-InsertOffer.html">InsertOffer</a></li>
+				<li><a href="function-InsertUser.html">InsertUser</a></li>
+				<li><a href="function-LoadLayout.html">LoadLayout</a></li>
+				<li><a href="function-LoadView.html">LoadView</a></li>
+				<li><a href="function-ModifyOffer.html">ModifyOffer</a></li>
+				<li><a href="function-ModifyUser.html">ModifyUser</a></li>
+				<li><a href="function-RemoveButton.html">RemoveButton</a></li>
+				<li><a href="function-SelectOption.html">SelectOption</a></li>
+				<li><a href="function-ValidateDate.html">ValidateDate</a></li>
+				<li><a href="function-ValidateDateGreaterThanToday.html">ValidateDateGreaterThanToday</a></li>
+				<li><a href="function-ValidateRequired.html">ValidateRequired</a></li>
+				<li><a href="function-ViewButton.html">ViewButton</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class OfferModel</h1>
+
+
+	<div class="description">
+	<p>Clase oferta</p>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		
+
+				<b>Author:</b>
+				2DAW<br>
+			<b>Located at</b> <a href="source-class-OfferModel.html#3-51" title="Go to source code">models/offerModel.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-OfferModel.html#26-50" title="Go to source code">__construct</a>( <span> <var>$id</var> = <span class="php-keyword1">NULL</span></span>, <span> <var>$description</var> = <span class="php-keyword1">NULL</span></span>, <span> <var>$contact</var> = <span class="php-keyword1">NULL</span></span>, <span> <var>$contactTLF</var> = <span class="php-keyword1">NULL</span></span>, <span> <var>$contactMail</var> = <span class="php-keyword1">NULL</span></span>, <span> <var>$address</var> = <span class="php-keyword1">NULL</span></span>, <span> <var>$assentament</var> = <span class="php-keyword1">NULL</span></span>, <span> <var>$postCode</var> = <span class="php-keyword1">NULL</span></span>, <span> <var>$province</var> = <span class="php-keyword1">NULL</span></span>, <span> <var>$state</var> = <span class="php-keyword1">NULL</span></span>, <span> <var>$dateCreation</var> = <span class="php-keyword1">NULL</span></span>, <span> <var>$dateComunication</var> = <span class="php-keyword1">NULL</span></span>, <span> <var>$psicologist</var> = <span class="php-keyword1">NULL</span></span>, <span> <var>$candidate</var> = <span class="php-keyword1">NULL</span></span>, <span> <var>$notes</var> = <span class="php-keyword1">NULL</span></span> )</code>
+
+		<div class="description short">
+			<p>Constructor</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Constructor</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary properties" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="id" id="$id">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-OfferModel.html#10" title="Go to source code"><var>$id</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$id" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="description" id="$description">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-OfferModel.html#11" title="Go to source code"><var>$description</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$description" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="contact" id="$contact">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-OfferModel.html#12" title="Go to source code"><var>$contact</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$contact" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="contactTLF" id="$contactTLF">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-OfferModel.html#13" title="Go to source code"><var>$contactTLF</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$contactTLF" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="contactMail" id="$contactMail">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-OfferModel.html#14" title="Go to source code"><var>$contactMail</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$contactMail" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="address" id="$address">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-OfferModel.html#15" title="Go to source code"><var>$address</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$address" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="assentament" id="$assentament">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-OfferModel.html#16" title="Go to source code"><var>$assentament</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$assentament" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="postCode" id="$postCode">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-OfferModel.html#17" title="Go to source code"><var>$postCode</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$postCode" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="province" id="$province">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-OfferModel.html#18" title="Go to source code"><var>$province</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$province" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="state" id="$state">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-OfferModel.html#19" title="Go to source code"><var>$state</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$state" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="dateCreation" id="$dateCreation">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-OfferModel.html#20" title="Go to source code"><var>$dateCreation</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$dateCreation" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="dateComunication" id="$dateComunication">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-OfferModel.html#21" title="Go to source code"><var>$dateComunication</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$dateComunication" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="psicologist" id="$psicologist">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-OfferModel.html#22" title="Go to source code"><var>$psicologist</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$psicologist" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="candidate" id="$candidate">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-OfferModel.html#23" title="Go to source code"><var>$candidate</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$candidate" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="notes" id="$notes">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-OfferModel.html#24" title="Go to source code"><var>$notes</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$notes" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>
