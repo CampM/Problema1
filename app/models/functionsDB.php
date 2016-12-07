@@ -107,7 +107,7 @@ function ConsultAllOffer($offerSetting){
 }
 
 /**
- * Devuelve todos los registros de ofertas de la base de datos ordenados por fecha de creacion
+ * Devuelve todos los registros de usuarios de la base de datos
  */
 function ConsultAllUser($userSetting){
 
@@ -133,7 +133,6 @@ function ConsultAllUser($userSetting){
 	{
 		$user = ConvertToUser($reg);
 
-		//Añadir la oferta a la lista de ofertas a mostrar
 		array_push($userList, $user);
 
 	}
@@ -185,6 +184,11 @@ function InsertOffer($offer){
 	return $isOk;
 }
 
+/**
+ * Inserta el registro de un usuario y devuelve si fue opsible hacerlo
+ *
+ * @param mixed $result
+ */
 function InsertUser($user){
 	$userArray = ConvertUserToSql($user);
 
@@ -206,6 +210,11 @@ function ModifyOffer($offer){
 	return $isOk;
 }
 
+/**
+ * Modifica el registro de un usuario y devuelve si fue opsible hacerlo
+ * @param unknown $user
+ * @return boolean
+ */
 function ModifyUser($user){
 	$userArray = ConvertUserToSql($user);
 
@@ -226,6 +235,11 @@ function DeleteOfferById($offerId){
 	return $isOk;
 }
 
+/**
+ * Elimina el registro de un usuario y devuelve si fue opsible hacerlo
+ * @param unknown $userId
+ * @return boolean
+ */
 function DeleteUserById($userId){
 
 	$db = DataBaseProvider::getInstance();
@@ -251,6 +265,11 @@ function ConsultOfferById($offerId){
 	return $offer;
 }
 
+/**
+ * Devuelve el registro completo de un usuario en base a su id si es posible o null sino existe
+ * @param unknown $userId
+ * @return NULL|user
+ */
 function ConsultUserById($userId){
 	$db = DataBaseProvider::getInstance();
 	$reg = $db->LeeUnRegistro('user', 'Id = '.$userId.'');
@@ -282,7 +301,6 @@ function ConsultProvince(){
 			'text' => $reg['nombre']
 		);
 
-		//Añadir la provincia a la lista de provincias
 		array_push($provinceList, $province);
 
 	}
@@ -342,6 +360,11 @@ function ConvertOfferToSql($offer){
 	return $offerArray;
 }
 
+/**
+ * Convierte los datos de un usuario a formato array para realizar un registro y lo devuelve 
+ * @param unknown $user
+ * @return NULL[]
+ */
 function ConvertUserToSql($user){
 
 	$userArray = array(
@@ -366,6 +389,9 @@ function ConvertToUser($reg){
 	return $user;
 }
 
+/**
+ * Devuelve los datos de filtrado para la busqueda de ofertas, devolviendo siempre en primer lugar la fecha de creacion 
+ */
 function GetOfferOrderSQL($orderColumn){
 
 	$order = 'DateCreation';
@@ -389,7 +415,7 @@ function GetOfferOrderSQL($orderColumn){
 }
 
 /**
- * Devuelve condiciones para los filtrados de ofertas
+ * Devuelve condiciones de comparacion para el filtrado de busqueda en la lista de ofertas
  * @return string
  */
 function GetOfferCondition($filters){

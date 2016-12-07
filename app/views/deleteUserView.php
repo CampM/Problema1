@@ -1,8 +1,6 @@
-<?php
-/**
- * Vista para el borrado de oferta
- */
-?>
+
+<!-- Vista para el borrado de usuario -->
+
 
 <div class="commonForm">
 

@@ -23,6 +23,9 @@ class OfferModel{
 	public $candidate;
 	public $notes;
 
+	/**
+	 * Constructor
+	 */
 	function __construct($id = NULL, $description = NULL, $contact = NULL, $contactTLF = NULL, $contactMail = NULL, $address = NULL, $assentament = NULL, $postCode = NULL, $province = NULL, $state = NULL, $dateCreation = NULL, $dateComunication = NULL, $psicologist = NULL, $candidate = NULL, $notes = NULL){
 
 		if ($dateCreation == NULL){

@@ -1,12 +1,18 @@
 <?php
 
-//Devuelve cierto si el parametro de entrada cumple las condiciones de estar relleno
+
+/**
+ * Función que devuelve cierto si el parametro de entrada cumple las condiciones de estar relleno
+ */
 function ValidateRequired($data){
 	return !(($data == NULL) || (trim($data) == ''));
 }
 
 
-//Devuelve verdadero o falso para la validacion de la fecha en formato español
+
+/**
+ * Función que devuelve verdadero o falso para la validacion de la fecha en formato español
+ */
 function ValidateDate($date)
 {
 	if ($date == NULL)
@@ -14,14 +20,14 @@ function ValidateDate($date)
 		return true;
 	}
 
-	//Creo una variable con un valor datetime desde un string en formato de fecha español
     $d = date_create_from_format('d-m-Y', $date);
 
-    //Devuelvo verdadero o falso en funcion de que el valor de $d no sea nulo y date = a string con formato de fecha español
     return $d && (date_format($d, 'd-m-Y') == $date);
 }
 
-//Devuelve verdadero o falso en funcion de si la fecha es mayor o no a la actual
+/**
+ * Función que devuelve verdadero o falso en funcion de si la fecha es mayor o no a la actual
+ */
 function ValidateDateGreaterThanToday($date)
 {
 	if ($date == NULL)
@@ -35,7 +41,7 @@ function ValidateDateGreaterThanToday($date)
 	}
 
 	$d = date_create_from_format('d-m-Y', $date);
-	//Sentencias para eliminar la hora
+	
 	$today = date_create('today');
 	$today = date_format($today, 'd-m-Y');
 	$today = date_create_from_format('d-m-Y', $today);
@@ -44,7 +50,9 @@ function ValidateDateGreaterThanToday($date)
 }
 
 
-//Filtrado de errores
+/**
+ * Validacion de errores
+ */
 function GetOfferErrors($offer){
 		$error = array();
 
@@ -98,6 +106,9 @@ function GetOfferErrors($offer){
 		return $error;
 }
 
+/**
+ * Función que devuelve un array con los errores de reelenear datos a mostrar en la vista correspondiente
+ */
 function GetUserErrors($user){
 		$error = array();
 

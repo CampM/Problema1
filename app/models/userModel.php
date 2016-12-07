@@ -14,7 +14,9 @@ class UserModel{
 	public $pass;
 	public $pass2;
 
-	
+	/**
+	 * Constructor
+	 */
 	function __construct($id = NULL, $name = NULL, $userType = NULL, $username = NULL, $pass = NULL, $pass2 = NULL){
 
 		$this->id = $id;

@@ -1,6 +1,6 @@
 <?php 
 /**
- * Controlador frontal
+ * Controlador encargado de añadir usuarios
  */
 
 include_once MODEL_PATH.'userModel.php';

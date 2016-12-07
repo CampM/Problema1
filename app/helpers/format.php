@@ -1,6 +1,8 @@
 <?php
 
-//Pasar fecha de formato a BBDD a formato español
+/**
+ * Función encargada de pasar una fecha dada en formato BBDD a formato español
+ */
 function ConvertToSpanishDate($date){
 	$spanishDate = '';
 	if (($date != null) && ($date != '0000-00-00')){
@@ -10,7 +12,9 @@ function ConvertToSpanishDate($date){
 	return $spanishDate;
 }
 
-//Pasa la fecha de formato español a formato de BBDD
+/**
+ * Función encargada de pasar una fecha dada en formato español a formato BBDD
+ */
 function ConvertToBBDDDate($date){
 	$bbddDate = '';
 	if (($date != null) && ($date != '0000-00-00')){

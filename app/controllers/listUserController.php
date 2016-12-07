@@ -1,6 +1,6 @@
 <?php 
 /**
- * Controlador encargado de la lista de ofertas
+ * Controlador encargado de la lista de usuarios
  */
 include_once MODEL_PATH.'functionsDB.php';
 
@@ -28,7 +28,6 @@ if ($_SESSION['UserInfo']->IsAdmin())
 }
 else
 {
-   // Error No Permisos
 	header('location: '.ERROR_PATH.'&e=500.3');
 }
 

@@ -79,7 +79,6 @@ if (isset($_SESSION['UserInfo'])){
        echo LoadLayout('Página no encontrada', 'Error 404: Pagina no encontrada');
     }
 }
-//else de usuarios
 else
 {
     include(CTRL_PATH.'loginController.php');

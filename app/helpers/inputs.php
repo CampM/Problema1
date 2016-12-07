@@ -1,11 +1,16 @@
 <?php
 
+/**
+ * Función encargada de crear inputs genericos
+ */
 function InputCreator($type, $name, $value){
 
 	echo '<input class="form-control" type="'.$type.'" name="'.$name.'" id="'.$name.'" value="'.$value.'" />';
 }
 
-//Crea select option
+/**
+ * Función encargada de crear un selec options
+ */
 function SelectOption($name, array $options, $value, $showEmptyOption = true)
 {
 	echo "<select class=\"form-control\" name=\"$name\" id=\"$name\">";
@@ -27,7 +32,9 @@ function SelectOption($name, array $options, $value, $showEmptyOption = true)
 	echo "</select>";
 }
 
-//Dada una lista de opciones y el valor seleccionado, me devuelve el texto asociado al valor
+/**
+ * Función encargada de devolver el texto asociado a un valor, dada una lista de opciones
+ */
 function GetSelectedOption($name, array $options, $value)
 {	
 	$selectedOption = '';
@@ -44,6 +51,9 @@ function GetSelectedOption($name, array $options, $value)
 	return $selectedOption;
 }
 
+/**
+ * Función encargada de crear un input de tipo radio dada su lista de opciones como array
+ */
 function InputsRadio($name, array $radioList, $value)
 {
 
@@ -71,6 +81,9 @@ function InputsRadio($name, array $radioList, $value)
 	}
 }
 
+/**
+ * Función encargada de crear opciones para un input de tipo radio
+ */
 function InputRadio($name, $text, $value, $userValue)
 {
 	
@@ -85,6 +98,9 @@ function InputRadio($name, $text, $value, $userValue)
 	echo " $text</label>";
 }
 
+/**
+ * Función encargada de crear el boton borrar
+ */
 function RemoveButton($isVisible, $url, $text='Eliminar'){
 	
 	if ($isVisible){
@@ -93,6 +109,9 @@ function RemoveButton($isVisible, $url, $text='Eliminar'){
 
 }
 
+/**
+ * Función encargada de crear el boton editar
+ */
 function EditButton($isVisible, $url, $text='Modificar'){
 	
 	if ($isVisible){
@@ -101,6 +120,9 @@ function EditButton($isVisible, $url, $text='Modificar'){
 
 }
 
+/**
+ * Función encargada de crear el boton de mas informacion
+ */
 function ViewButton($isVisible, $url, $text='Mas detalles'){
 	
 	if ($isVisible){

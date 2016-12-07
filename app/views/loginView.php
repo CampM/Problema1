@@ -1,5 +1,6 @@
 <html>
 <!--Vista de login para los usuarios -->
+
     <head>
         <title>JobYesterday - Login></title>
         <meta charset="UTF-8">
@@ -33,7 +34,7 @@
 	    	</div>
 	    </div>
 
-	    <footer></footer>>
+	    <footer>
 	        Moises Campon Garcia (c)
 	    </footer>
 	</body>

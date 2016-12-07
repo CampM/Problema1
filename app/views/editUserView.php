@@ -1,6 +1,6 @@
 <?php
 /**
- * Vista para la modificacion de oferta para el administrador
+ * Vista para la modificacion de usuarios
  */
 
 	include_once HELPERS_PATH.'inputs.php';

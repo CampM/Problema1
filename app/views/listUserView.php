@@ -1,6 +1,6 @@
 <?php
 /**
- * Vista de la lista de ofertas
+ * Vista de la lista de usuarios
  */
 	include_once HELPERS_PATH.'inputs.php';
 ?>
